@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>XPO Class</Title>
+      <Shortcut>xpoc</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>DevExpress.Xpo</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal>
+          <ID>ClassName</ID>
+          <ToolTip></ToolTip>
+          <Default>BusinessObject</Default>
+        </Literal>
+        <Object>
+          <ID>BaseType</ID>
+          <Type>System.Type</Type>
+          <ToolTip></ToolTip>
+          <Default>XPObject</Default>
+        </Object>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[public class $ClassName$ : $BaseType$ {
+        public $ClassName$(Session session) : base(session) { }
+    }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>XPO Property</Title>
+      <Shortcut>xpop</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PropertyName</ID>
+          <ToolTip></ToolTip>
+          <Default>Name</Default>
+        </Literal>
+        <Object>
+          <ID>PropertyType</ID>
+          <Type>System.Type</Type>
+          <ToolTip></ToolTip>
+          <Default>string</Default>
+        </Object>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[public $PropertyType$ $PropertyName$ {
+            get { return GetPropertyValue<$PropertyType$>("$PropertyName$"); }
+            set { SetPropertyValue<$PropertyType$>("$PropertyName$", value); }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>XPO Property with field</Title>
+      <Shortcut>xpopf</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PropertyName</ID>
+          <ToolTip></ToolTip>
+          <Default>Name</Default>
+        </Literal>
+        <Object>
+          <ID>PropertyType</ID>
+          <Type>System.Type</Type>
+          <ToolTip></ToolTip>
+          <Default>string</Default>
+        </Object>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[private $PropertyType$ _$PropertyName$;
+        public $PropertyType$ $PropertyName$ {
+            get { return _$PropertyName$; }
+            set { SetPropertyValue<$PropertyType$>("$PropertyName$", ref _$PropertyName$, value); }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>XPO Alias Property</Title>
+      <Shortcut>xpopa</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PropertyName</ID>
+          <ToolTip></ToolTip>
+          <Default>Name</Default>
+        </Literal>
+        <Literal>
+          <ID>Alias</ID>
+          <ToolTip></ToolTip>
+          <Default>1=1</Default>
+        </Literal>
+        <Object>
+          <ID>PropertyType</ID>
+          <Type>System.Type</Type>
+          <ToolTip></ToolTip>
+          <Default>bool</Default>
+        </Object>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[[PersistentAlias("$Alias$")]
+        public $PropertyType$ $PropertyName$ {
+            get { return ($PropertyType$)Convert.ChangeType(EvaluateAlias("$PropertyName$"), typeof($PropertyType$)); }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>XPO Collection Property</Title>
+      <Shortcut>xpopc</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PropertyName</ID>
+          <ToolTip></ToolTip>
+          <Default>Details</Default>
+        </Literal>
+        <Object>
+          <ID>PropertyElementType</ID>
+          <Type>System.Type</Type>
+          <ToolTip></ToolTip>
+          <Default>BusinessObject</Default>
+        </Object>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[[Association]
+        public XPCollection<$PropertyElementType$> $PropertyName$ {
+            get { return GetCollection<$PropertyElementType$>("$PropertyName$"); }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>XPO Collection Property NP</Title>
+      <Shortcut>xpopcn</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PropertyName</ID>
+          <ToolTip></ToolTip>
+          <Default>Details</Default>
+        </Literal>
+        <Object>
+          <ID>PropertyElementType</ID>
+          <Type>System.Type</Type>
+          <ToolTip></ToolTip>
+          <Default>BusinessObject</Default>
+        </Object>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[private XPCollection<$PropertyElementType$> _$PropertyName$;
+        public XPCollection<$PropertyElementType$> $PropertyName$ {
+            get {
+                if (_$PropertyName$ == null) {
+                    _$PropertyName$ = new XPCollection<$PropertyElementType$>(Session, CriteriaOperator.Parse(""));
+                    _$PropertyName$.BindingBehavior = CollectionBindingBehavior.AllowNone;
+                }
+                return _$PropertyName$;
+            }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
