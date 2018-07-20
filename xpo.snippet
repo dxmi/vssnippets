@@ -61,7 +61,7 @@
   </CodeSnippet>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>XPO Property with field</Title>
+      <Title>XPO Property With Field</Title>
       <Shortcut>xpopf</Shortcut>
     </Header>
     <Snippet>
@@ -83,6 +83,35 @@
         public $PropertyType$ $PropertyName$ {
             get { return _$PropertyName$; }
             set { SetPropertyValue<$PropertyType$>("$PropertyName$", ref _$PropertyName$, value); }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>XPO Read-Only Property</Title>
+      <Shortcut>xpopr</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PropertyName</ID>
+          <ToolTip></ToolTip>
+          <Default>Oid</Default>
+        </Literal>
+        <Object>
+          <ID>PropertyType</ID>
+          <Type>System.Type</Type>
+          <ToolTip></ToolTip>
+          <Default>string</Default>
+        </Object>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[[Persistent("$PropertyName$")]
+        private $PropertyType$ _$PropertyName$;
+        [PersistentAlias("_$PropertyName$")]
+        public $PropertyType$ $PropertyName$ {
+            get { return _$PropertyName$; }
         }]]>
       </Code>
     </Snippet>
