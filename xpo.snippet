@@ -53,8 +53,8 @@
       </Declarations>
       <Code Language="CSharp">
         <![CDATA[public $PropertyType$ $PropertyName$ {
-            get { return GetPropertyValue<$PropertyType$>("$PropertyName$"); }
-            set { SetPropertyValue<$PropertyType$>("$PropertyName$", value); }
+            get { return GetPropertyValue<$PropertyType$>(nameof($PropertyName$)); }
+            set { SetPropertyValue<$PropertyType$>(nameof($PropertyName$), value); }
         }]]>
       </Code>
     </Snippet>
@@ -82,7 +82,7 @@
         <![CDATA[private $PropertyType$ _$PropertyName$;
         public $PropertyType$ $PropertyName$ {
             get { return _$PropertyName$; }
-            set { SetPropertyValue<$PropertyType$>("$PropertyName$", ref _$PropertyName$, value); }
+            set { SetPropertyValue<$PropertyType$>(nameof($PropertyName$), ref _$PropertyName$, value); }
         }]]>
       </Code>
     </Snippet>
@@ -107,9 +107,9 @@
         </Object>
       </Declarations>
       <Code Language="CSharp">
-        <![CDATA[[Persistent("$PropertyName$")]
+        <![CDATA[[Persistent(nameof($PropertyName$))]
         private $PropertyType$ _$PropertyName$;
-        [PersistentAlias("_$PropertyName$")]
+        [PersistentAlias(nameof(_$PropertyName$))]
         public $PropertyType$ $PropertyName$ {
             get { return _$PropertyName$; }
         }]]>
@@ -143,7 +143,7 @@
       <Code Language="CSharp">
         <![CDATA[[PersistentAlias("$Alias$")]
         public $PropertyType$ $PropertyName$ {
-            get { return ($PropertyType$)Convert.ChangeType(EvaluateAlias("$PropertyName$"), typeof($PropertyType$)); }
+            get { return ($PropertyType$)Convert.ChangeType(EvaluateAlias(nameof($PropertyName$)), typeof($PropertyType$)); }
         }]]>
       </Code>
     </Snippet>
@@ -170,7 +170,7 @@
       <Code Language="CSharp">
         <![CDATA[[Association]
         public XPCollection<$PropertyElementType$> $PropertyName$ {
-            get { return GetCollection<$PropertyElementType$>("$PropertyName$"); }
+            get { return GetCollection<$PropertyElementType$>(nameof($PropertyName$)); }
         }]]>
       </Code>
     </Snippet>
